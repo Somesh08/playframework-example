@@ -1,0 +1,92 @@
+
+
+@import data.EmployeeData
+@(employeeData: EmployeeData)
+
+<!-- <table cellpadding="4">
+	                   
+	
+	                    @for(ed <- employeeData.getEmpData) {
+	                        <tr>
+	                            <td>@ed.getName</td>
+	                        </tr>
+	                    }
+	                </table> -->
+	                
+<html>
+<head>
+<link href="@routes.Assets.versioned("Font-Awesome-4.7.0/css/font-awesome.min.css")" rel="stylesheet" media="screen">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<style>
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<h2>Employee Data</h2>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Job</th>
+    <th>Phone Number</th>
+    <th>Edit</th>
+  </tr>
+   @for(ed <- employeeData.getEmpData) {
+        <tr>
+        	<td>@ed.getId</td>
+            <td>@ed.getName</td>
+            <td>@ed.getEmail</td>
+            <td>@ed.getJob</td>
+            <td>@ed.getPh</td>
+            <td><a onclick="deleteRecord(@ed.getId)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+        </tr>
+    }
+</table>
+<script>
+function deleteRecord(id){
+
+console.log(id);
+var obj = {
+       id:id
+      };
+ $.ajax({
+        url: "@routes.HomeController.delete()",
+        data: JSON.stringify(obj),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        type: 'POST',
+        success: function(res) {
+		console.log(res);
+          if (res) {
+          alert("Success!");
+          } else {
+            alert("Failed...");
+          }
+        }
+      });
+
+}
+</script>
+</body>
+</html>
+
+
