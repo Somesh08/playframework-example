@@ -23,7 +23,7 @@ import javax.inject.Inject;
 //import views.html.*;  
 /**
  *
- * @author myfear
+ * @author Somesh Biswas
  */
 public class HomeController extends Controller {
 	
