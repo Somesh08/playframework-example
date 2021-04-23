@@ -69,7 +69,7 @@ public class HomeController extends Controller {
             if (cluster != null) cluster.close();
         }
 
-        return ok(views.html.index.render(renderString));
+        return ok(views.html.index.render(renderStringCopy));
     }
 	
 	/* public Result upload() {
